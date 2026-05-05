@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Local data/cache/log outputs
+quant_etf_project/data/raw/**/*.csv
+quant_etf_project/data/processed/*.csv
+quant_etf_project/data/cache/
+quant_etf_project/logs/*.log
+quant_etf_project/reports/*.md
+
+# Notebook runtime noise
+.ipynb_checkpoints/
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
