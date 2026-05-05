@@ -23,6 +23,13 @@ DEFAULT_RETRY_TIMES = 2
 # Manual ETF universe fallback. Codes should be six digits without exchange prefix.
 UNIVERSE_MODE = "auto"  # "auto" fetches source universe; "manual" uses MANUAL_ETF_CODES only.
 MANUAL_ETF_CODES = ["510300", "510500", "159915", "588000", "512100"]
+MANUAL_ETF_NAMES = {
+    "510300": "沪深300ETF",
+    "510500": "中证500ETF",
+    "159915": "创业板ETF",
+    "588000": "科创50ETF",
+    "512100": "中证1000ETF",
+}
 
 
 def default_start_date(today: date | None = None) -> str:

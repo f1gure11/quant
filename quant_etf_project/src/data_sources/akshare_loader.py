@@ -31,8 +31,11 @@ def fetch_etf_universe(logger: object | None = None) -> pd.DataFrame:
     }
     out = df.rename(columns=rename_map).copy()
     out["code"] = out["code"].astype(str).str.zfill(6)
-    out["name"] = out.get("name", "")
-    out["exchange"] = out.get("exchange", "").replace({"": pd.NA})
+    if "name" not in out.columns:
+        out["name"] = ""
+    if "exchange" not in out.columns:
+        out["exchange"] = ""
+    out["exchange"] = out["exchange"].replace({"": pd.NA})
     out["exchange"] = out["exchange"].fillna(out["code"].map(_infer_exchange))
     out["list_date"] = ""
     out["status"] = "active"

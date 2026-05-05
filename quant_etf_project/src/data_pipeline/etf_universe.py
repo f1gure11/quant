@@ -6,7 +6,7 @@ from pathlib import Path
 
 import pandas as pd
 
-from src.config import MANUAL_ETF_CODES, PROCESSED_DIR, UNIVERSE_MODE
+from src.config import MANUAL_ETF_CODES, MANUAL_ETF_NAMES, PROCESSED_DIR, UNIVERSE_MODE
 from src.data_sources import akshare_loader, baostock_loader
 
 
@@ -21,7 +21,7 @@ def build_manual_universe(codes: list[str] | None = None) -> pd.DataFrame:
         rows.append(
             {
                 "code": text,
-                "name": "",
+                "name": MANUAL_ETF_NAMES.get(text, ""),
                 "exchange": _infer_exchange(text),
                 "list_date": "",
                 "status": "manual",
@@ -58,7 +58,8 @@ def fetch_auto_universe(preferred_source: str = "baostock", logger: object | Non
             if logger:
                 logger.warning("AKShare ETF universe fallback failed: %s", exc)
 
-    auto = pd.concat([frame for frame in frames if not frame.empty], ignore_index=True) if frames else pd.DataFrame()
+    non_empty_frames = [frame for frame in frames if frame is not None and not frame.empty]
+    auto = pd.concat(non_empty_frames, ignore_index=True) if non_empty_frames else pd.DataFrame()
     if auto.empty:
         return build_manual_universe()
 

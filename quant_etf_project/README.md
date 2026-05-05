@@ -30,6 +30,12 @@ python scripts/download_etf_data.py --source baostock --start 2019-01-01 --end 2
 python scripts/download_etf_data.py --source akshare --start 2019-01-01 --end 2024-12-31
 ```
 
+只下载 `src/config.py` 中配置的手工 ETF 列表，适合首次验证：
+
+```powershell
+python scripts/download_etf_data.py --universe-mode manual --source akshare --start 2019-01-01 --end 2024-12-31
+```
+
 强制重下本地已有数据：
 
 ```powershell

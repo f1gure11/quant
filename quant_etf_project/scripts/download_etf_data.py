@@ -20,6 +20,12 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--start", default=default_start_date(), help="start date, YYYY-MM-DD")
     parser.add_argument("--end", default=default_end_date(), help="end date, YYYY-MM-DD")
     parser.add_argument("--force-update", action="store_true", help="re-download existing local files")
+    parser.add_argument(
+        "--universe-mode",
+        choices=["auto", "manual"],
+        default="auto",
+        help="auto fetches ETF universe; manual uses MANUAL_ETF_CODES from src/config.py",
+    )
     return parser.parse_args()
 
 
@@ -31,6 +37,7 @@ def main() -> int:
         start_date=args.start,
         end_date=args.end,
         force_update=args.force_update,
+        universe_mode=args.universe_mode,
     )
     from src.data_pipeline.downloader import download_etf_dataset
 
